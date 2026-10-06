@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Indian Evening — Cultural Dinner Party</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+  --black:#090304;
+  --wine:#26070b;
+  --red:#741723;
+  --red2:#a52b37;
+  --gold:#d8ad55;
+  --gold2:#ffe4a0;
+  --cream:#fff5df;
+  --muted:#cdbda5;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--black);
+  color:white;
+  font-family:"DM Sans",sans-serif;
+  overflow-x:hidden;
+}
+
+section{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+
+h1,h2,h3{
+  font-family:"Cormorant Garamond",serif;
+}
+
+img{
+  display:block;
+  width:100%;
+}
+
+.container{
+  width:min(1180px,90%);
+  margin:auto;
+  position:relative;
+  z-index:5;
+}
+
+.gold{
+  color:var(--gold2);
+}
+
+.kicker{
+  font-size:10px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:var(--gold2);
+  margin-bottom:22px;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1.1s cubic-bezier(.16,1,.3,1);
+}
+
+.reveal.show{
+  opacity:1;
+  transform:none;
+}
+
+/* NAVIGATION */
+
+.nav{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1000;
+  display:flex;
+  gap:4px;
+  padding:7px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(8,2,3,.72);
+  backdrop-filter:blur(20px);
+  border-radius:50px;
+}
+
+.nav a{
+  color:white;
+  text-decoration:none;
+  font-size:9px;
+  letter-spacing:1.5px;
+  padding:11px 14px;
+  border-radius:30px;
+  transition:.35s;
+}
+
+.nav a:hover{
+  background:var(--gold);
+  color:#170608;
+}
+
+/* PARTICLES */
+
+.petal{
+  position:fixed;
+  top:-30px;
+  width:8px;
+  height:13px;
+  border-radius:80% 10% 80% 10%;
+  background:#e8bd63;
+  opacity:.65;
+  pointer-events:none;
+  z-index:50;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh) rotate(700deg);
+    opacity:0;
+  }
+}
+
+/* MANDALA */
+
+.mandala{
+  position:absolute;
+  width:700px;
+  height:700px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  border:1px solid rgba(255,220,140,.15);
+  border-radius:50%;
+  animation:rotateMandala 55s linear infinite;
+  pointer-events:none;
+}
+
+.mandala:before,
+.mandala:after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(255,220,140,.13);
+  border-radius:50%;
+}
+
+.mandala:before{
+  inset:80px;
+}
+
+.mandala:after{
+  inset:160px;
+}
+
+@keyframes rotateMandala{
+  to{
+    transform:translate(-50%,-50%) rotate(360deg);
+  }
+}
+
+/* BUTTON */
+
+.btn{
+  display:inline-block;
+  padding:15px 28px;
+  border:1px solid var(--gold);
+  color:white;
+  border-radius:50px;
+  text-decoration:none;
+  font-size:10px;
+  letter-spacing:3px;
+  transition:.4s;
+}
+
+.btn:hover{
+  background:var(--gold);
+  color:#180608;
+  transform:translateY(-5px);
+  box-shadow:0 20px 45px rgba(216,173,85,.25);
+}
+
+/* =========================
+   01 HERO
+========================= */
+
+.hero{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  background:
+    linear-gradient(rgba(15,2,3,.28),rgba(10,2,3,.88)),
+    url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=2200&q=90")
+    center/cover;
+}
+
+.hero-content{
+  max-width:1000px;
+  padding:30px;
+  position:relative;
+  z-index:5;
+}
+
+.hero-small{
+  color:var(--gold2);
+  text-transform:uppercase;
+  letter-spacing:8px;
+  font-size:11px;
+}
+
+.hero h1{
+  font-size:clamp(80px,13vw,175px);
+  line-height:.68;
+  margin:45px 0;
+  animation:heroIn 1.5s cubic-bezier(.16,1,.3,1);
+}
+
+.hero p{
+  max-width:650px;
+  margin:0 auto 35px;
+  line-height:1.8;
+  color:#eadbc4;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:scale(.65);
+    letter-spacing:25px;
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* =========================
+   02 INVITATION
+========================= */
+
+.invitation{
+  background:
+    radial-gradient(circle at 10% 20%,#71151f,transparent 30%),
+    radial-gradient(circle at 90% 80%,#4d0d15,transparent 30%),
+    #150506;
+  display:flex;
+  align-items:center;
+}
+
+.invite-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.invite-text h2{
+  font-size:clamp(65px,8vw,110px);
+  line-height:.78;
+}
+
+.invite-text p{
+  max-width:550px;
+  margin-top:30px;
+  line-height:1.8;
+  color:#d8c9b3;
+}
+
+/* ENVELOPE */
+
+.envelope-zone{
+  height:650px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  perspective:1500px;
+}
+
+.envelope{
+  width:460px;
+  height:305px;
+  position:relative;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  transition:.8s;
+  filter:drop-shadow(0 40px 45px rgba(0,0,0,.7));
+}
+
+.envelope:hover{
+  transform:translateY(-10px) rotateX(3deg);
+}
+
+.env-body{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg,#fff2c9,#cba45b);
+}
+
+.env-body:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(35deg,transparent 49.5%,rgba(83,48,12,.32) 50%,transparent 51%),
+    linear-gradient(-35deg,transparent 49.5%,rgba(83,48,12,.32) 50%,transparent 51%);
+}
+
+/* letter */
+
+.letter{
+  position:absolute;
+  z-index:4;
+  left:42px;
+  top:-75px;
+  width:376px;
+  height:455px;
+  padding:50px 42px;
+  color:#361013;
+  background:linear-gradient(145deg,#fffaf0,#ead19b);
+  box-shadow:0 25px 60px rgba(0,0,0,.5);
+  transform:translateY(175px);
+  transition:1.5s cubic-bezier(.16,1,.3,1);
+}
+
+.letter:before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  border:1px solid #ad8337;
+}
+
+.letter-mini{
+  text-align:center;
+  color:#a07428;
+  letter-spacing:6px;
+  font-size:9px;
+}
+
+.letter h3{
+  text-align:center;
+  font-size:48px;
+  margin:18px 0 30px;
+}
+
+.letter-info{
+  display:grid;
+  gap:13px;
+  font-size:12px;
+  position:relative;
+  z-index:2;
+}
+
+.letter p{
+  margin-top:30px;
+  font-size:12px;
+  line-height:1.7;
+  color:#604c3a;
+  position:relative;
+  z-index:2;
+}
+
+/* flap */
+
+.flap{
+  position:absolute;
+  z-index:8;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  border-left:230px solid transparent;
+  border-right:230px solid transparent;
+  border-top:160px solid #d0ad65;
+  transform-origin:top center;
+  transition:1.2s cubic-bezier(.16,1,.3,1);
+  backface-visibility:hidden;
+}
+
+/* seal */
+
+.seal{
+  position:absolute;
+  z-index:20;
+  left:50%;
+  top:51%;
+  width:84px;
+  height:84px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--gold2);
+  background:
+    radial-gradient(circle,#b72c3a,#580b13);
+  border:3px solid var(--gold2);
+  font-family:"Cormorant Garamond";
+  font-size:34px;
+  box-shadow:
+    0 0 0 0 rgba(255,224,150,.7),
+    0 0 35px rgba(255,190,60,.2);
+  transition:.7s;
+}
+
+.envelope:hover .seal{
+  animation:sealPulse 1.2s infinite;
+}
+
+@keyframes sealPulse{
+  50%{
+    box-shadow:
+      0 0 0 17px rgba(255,220,130,.07),
+      0 0 50px rgba(255,205,90,.6);
+  }
+}
+
+.envelope.open .flap{
+  transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+  transform:translateY(-130px);
+}
+
+.envelope.open .seal{
+  opacity:0;
+  transform:translate(-50%,-50%) scale(3) rotate(30deg);
+}
+
+.click-hint{
+  position:absolute;
+  bottom:25px;
+  color:var(--gold2);
+  font-size:9px;
+  letter-spacing:4px;
+  animation:hint 1.5s infinite;
+}
+
+@keyframes hint{
+  50%{
+    opacity:.4;
+    transform:translateY(6px);
+  }
+}
+
+/* diyas */
+
+.diyas{
+  position:absolute;
+  bottom:28px;
+  left:8%;
+  right:8%;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+}
+
+.diya{
+  width:48px;
+  height:18px;
+  background:#ad7528;
+  border-radius:50%;
+  position:relative;
+}
+
+.diya:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:8px;
+  width:14px;
+  height:27px;
+  transform:translateX(-50%);
+  background:linear-gradient(#fff6af,#f28a18,transparent);
+  border-radius:50%;
+  animation:flame .8s infinite alternate;
+}
+
+@keyframes flame{
+  to{
+    transform:translateX(-50%) scale(.78,1.08);
+  }
+}
+
+/* =========================
+   03 ARRIVAL
+========================= */
+
+.arrival{
+  background:#120405;
+  display:flex;
+  align-items:center;
+}
+
+.arrival-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.real-india-collage{
+  height:620px;
+  position:relative;
+}
+
+.real-india-collage img{
+  position:absolute;
+  object-fit:cover;
+  box-shadow:0 30px 70px #000;
+  transition:.7s;
+}
+
+.india-main{
+  width:72%;
+  height:510px;
+  left:0;
+  top:50px;
+  transform:rotate(-4deg);
+}
+
+.india-small{
+  width:52%;
+  height:310px;
+  right:0;
+  bottom:0;
+  transform:rotate(5deg);
+  border:8px solid #f6ead2;
+}
+
+.real-india-collage:hover .india-main{
+  transform:rotate(-6deg) translateX(-12px);
+}
+
+.real-india-collage:hover .india-small{
+  transform:rotate(7deg) translateX(10px);
+}
+
+.arrival h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.rules{
+  margin-top:40px;
+  display:grid;
+  gap:14px;
+}
+
+.rule{
+  padding:18px;
+  display:grid;
+  grid-template-columns:48px 1fr;
+  gap:15px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.035);
+  transition:.4s;
+}
+
+.rule:hover{
+  transform:translateX(10px);
+  border-color:var(--gold);
+}
+
+.rule-number{
+  color:var(--gold2);
+  font-family:"Cormorant Garamond";
+  font-size:30px;
+}
+
+/* =========================
+   04 GIFTS
+========================= */
+
+.gifts{
+  padding:130px 0;
+  background:#20070b;
+}
+
+.gifts h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.gift-grid{
+  margin-top:60px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.gift{
+  height:430px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+}
+
+.gift img{
+  height:100%;
+  object-fit:cover;
+  transition:.8s;
+}
+
+.gift:hover img{
+  transform:scale(1.1);
+}
+
+.gift:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 30%,rgba(0,0,0,.9));
+}
+
+.gift-info{
+  position:absolute;
+  z-index:2;
+  left:22px;
+  bottom:25px;
+}
+
+.gift-info h3{
+  font-size:39px;
+}
+
+.gift-info p{
+  font-size:10px;
+  color:#d9c9b2;
+}
+
+/* =========================
+   05 MENU
+========================= */
+
+.menu{
+  padding:130px 0;
+  background:#0d0304;
+}
+
+.menu-head{
+  text-align:center;
+  max-width:800px;
+  margin:auto;
+}
+
+.menu-head h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.menu-head p{
+  color:#cfc0aa;
+  line-height:1.8;
+  margin-top:25px;
+}
+
+.food-grid{
+  margin-top:60px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.food{
+  height:250px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
+}
+
+.food img{
+  height:100%;
+  object-fit:cover;
+  transition:.7s;
+}
+
+.food:hover img{
+  transform:scale(1.1);
+}
+
+.food:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent 20%,rgba(0,0,0,.88));
+}
+
+.food-info{
+  position:absolute;
+  z-index:2;
+  bottom:18px;
+  left:18px;
+}
+
+.food-info small{
+  color:var(--gold2);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-size:8px;
+}
+
+.food-info h3{
+  font-size:31px;
+}
+
+/* spice */
+
+.spice-box{
+  max-width:720px;
+  margin:45px auto 0;
+  padding:30px;
+  border:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
+
+.spice-box h3{
+  font-size:36px;
+  margin-bottom:20px;
+}
+
+.spice-buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.spice-buttons button{
+  padding:11px 18px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:30px;
+  background:transparent;
+  color:white;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.spice-buttons button:hover,
+.spice-buttons button.active{
+  background:var(--gold);
+  color:#160607;
+}
+
+#spiceText{
+  margin-top:17px;
+  font-size:12px;
+  color:#cdbda7;
+}
+
+/* =========================
+   06 HOW TO EAT
+========================= */
+
+.eating{
+  display:flex;
+  align-items:center;
+  background:#160506;
+}
+
+.eating-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.hand-eating{
+  height:650px;
+  position:relative;
+}
+
+.hand-eating img{
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  border:1px solid rgba(255,255,255,.15);
+  box-shadow:0 35px 80px #000;
+}
+
+.hand-caption{
+  position:absolute;
+  bottom:25px;
+  left:25px;
+  right:25px;
+  padding:20px;
+  background:rgba(0,0,0,.68);
+  backdrop-filter:blur(12px);
+  border-left:2px solid var(--gold);
+}
+
+.hand-caption strong{
+  color:var(--gold2);
+}
+
+.eating h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.steps{
+  margin-top:40px;
+  display:grid;
+  gap:15px;
+}
+
+.step{
+  display:grid;
+  grid-template-columns:55px 1fr;
+  gap:16px;
+  padding:18px;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.035);
+  transition:.4s;
+}
+
+.step:hover{
+  transform:translateX(10px);
+  border-color:var(--gold);
+}
+
+.step-num{
+  width:50px;
+  height:50px;
+  border:1px solid var(--gold);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--gold2);
+  font-family:"Cormorant Garamond";
+  font-size:24px;
+}
+
+.step h3{
+  font-size:28px;
+}
+
+.step p{
+  color:#cdbda7;
+  font-size:11px;
+  line-height:1.6;
+  margin-top:3px;
+}
+
+/* =========================
+   07 THALI
+========================= */
+
+.thali-section{
+  padding:130px 0;
+  text-align:center;
+  background:
+    radial-gradient(circle at center,#64151f,transparent 48%),
+    #130405;
+}
+
+.thali-section h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.thali{
+  width:500px;
+  height:500px;
+  max-width:85vw;
+  max-height:85vw;
+  margin:65px auto 0;
+  border-radius:50%;
+  border:14px solid #d8ad55;
+  background:
+    url("https://images.pexels.com/photos/36885763/pexels-photo-36885763.jpeg?auto=compress&cs=tinysrgb&w=1400")
+    center/cover;
+  box-shadow:
+    0 0 0 25px rgba(216,173,85,.07),
+    0 40px 100px #000;
+  position:relative;
+}
+
+.thali:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:rgba(0,0,0,.2);
+}
+
+.thali-label{
+  position:absolute;
+  z-index:3;
+  padding:12px 18px;
+  background:rgba(20,5,5,.85);
+  border:1px solid var(--gold);
+  color:var(--gold2);
+  font-family:"Cormorant Garamond";
+  font-size:22px;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.thali-label:hover{
+  transform:scale(1.12);
+  background:#5d121b;
+}
+
+.label-dal{top:12%;left:10%}
+.label-rice{top:14%;right:10%}
+.label-curry{bottom:15%;left:10%}
+.label-naan{bottom:13%;right:10%}
+
+/* =========================
+   08 SHARING
+========================= */
+
+.sharing{
+  display:flex;
+  align-items:center;
+  background:#25080c;
+}
+
+.share-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.share-photo{
+  height:620px;
+  overflow:hidden;
+}
+
+.share-photo img{
+  height:100%;
+  object-fit:cover;
+  transition:1s;
+}
+
+.share-photo:hover img{
+  transform:scale(1.06);
+}
+
+.sharing h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.share-list{
+  margin-top:40px;
+  display:grid;
+  gap:20px;
+}
+
+.share-item{
+  border-bottom:1px solid rgba(255,255,255,.1);
+  padding-bottom:18px;
+}
+
+.share-item h3{
+  font-size:31px;
+  color:var(--gold2);
+}
+
+.share-item p{
+  margin-top:5px;
+  color:#d2c2ac;
+  line-height:1.6;
+}
+
+/* =========================
+   09 RULES
+========================= */
+
+.rules-section{
+  padding:130px 0;
+  background:
+    radial-gradient(circle at 80% 15%,#68151f,transparent 35%),
+    #100304;
+}
+
+.rules-title{
+  text-align:center;
+}
+
+.rules-title h2{
+  font-size:clamp(65px,8vw,105px);
+  line-height:.8;
+}
+
+.do-dont{
+  margin-top:60px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.panel{
+  padding:45px;
+  min-height:500px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.panel h3{
+  font-size:55px;
+  margin-bottom:30px;
+}
+
+.panel:first-child h3{
+  color:var(--gold2);
+}
+
+.panel:last-child h3{
+  color:#e48989;
+}
+
+.panel ul{
+  list-style:none;
+  display:grid;
+  gap:15px;
+}
+
+.panel li{
+  color:#d7c8b2;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  line-height:1.5;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  background:
+    linear-gradient(rgba(10,2,3,.2),rgba(10,2,3,.9)),
+    url("https://images.pexels.com/photos/8819307/pexels-photo-8819307.jpeg?auto=compress&cs=tinysrgb&w=2200")
+    center/cover;
+}
+
+.final-content{
+  max-width:950px;
+  position:relative;
+  z-index:5;
+}
+
+.final h2{
+  font-size:clamp(70px,10vw,150px);
+  line-height:.7;
+  margin:40px 0;
+}
+
+.final p{
+  max-width:650px;
+  margin:25px auto;
+  color:#dfd0ba;
+  line-height:1.8;
+}
+
+.namaste{
+  color:var(--gold2);
+  font-family:"Cormorant Garamond";
+  font-size:60px;
+  letter-spacing:9px;
+  animation:glow 2s infinite;
+}
+
+@keyframes glow{
+  50%{
+    text-shadow:
+      0 0 15px rgba(255,220,140,.5),
+      0 0 50px rgba(255,220,140,.5);
+  }
+}
+
+/* =========================
+   POPUP
+========================= */
+
+.popup{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(5,1,2,.86);
+  backdrop-filter:blur(18px);
+}
+
+.popup.active{
+  display:flex;
+}
+
+.popup-card{
+  width:min(700px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#fff4dd;
+  color:#321013;
+  padding:18px;
+  position:relative;
+  animation:popupIn .5s cubic-bezier(.16,1,.3,1);
+}
+
+.popup-card img{
+  width:100%;
+  height:390px;
+  object-fit:cover;
+}
+
+.popup-content{
+  padding:25px;
+  text-align:center;
+}
+
+.popup-content h3{
+  font-size:55px;
+}
+
+.popup-content p{
+  color:#654d3a;
+  line-height:1.7;
+  margin-top:10px;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:12px;
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.9);
+  font-size:25px;
+  cursor:pointer;
+  z-index:5;
+}
+
+@keyframes popupIn{
+  from{
+    opacity:0;
+    transform:scale(.7) translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .nav{
+    display:none;
+  }
+
+  .invite-grid,
+  .arrival-grid,
+  .eating-grid,
+  .share-grid{
+    grid-template-columns:1fr;
+  }
+
+  .gift-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .food-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .do-dont{
+    grid-template-columns:1fr;
+  }
+
+  .envelope-zone{
+    height:560px;
+  }
+
+  .real-india-collage{
+    height:520px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .hero h1{
+    font-size:75px;
+  }
+
+  .gift-grid,
+  .food-grid{
+    grid-template-columns:1fr;
+  }
+
+  .envelope{
+    transform:scale(.65);
+  }
+
+  .envelope:hover{
+    transform:scale(.65) translateY(-8px);
+  }
+
+  .envelope.open{
+    transform:scale(.65) translateY(20px);
+  }
+
+  .real-india-collage{
+    height:430px;
+  }
+
+  .india-main{
+    height:350px;
+  }
+
+  .india-small{
+    height:230px;
+  }
+
+  .hand-eating{
+    height:520px;
+  }
+
+  .panel{
+    padding:25px;
+  }
+
+  .panel h3{
+    font-size:42px;
+  }
+
+  .thali{
+    width:420px;
+    height:420px;
+  }
+
+  .thali-label{
+    font-size:16px;
+    padding:8px 12px;
+  }
+
+  .popup-card img{
+    height:270px;
+  }
+
+}
+
+/* accessibility */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *:before,
+  *:after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- NAV -->
+
+<nav class="nav">
+  <a href="#home">HOME</a>
+  <a href="#invite">INVITE</a>
+  <a href="#arrival">ARRIVAL</a>
+  <a href="#gifts">GIFTS</a>
+  <a href="#menu">MENU</a>
+  <a href="#eat">EAT</a>
+  <a href="#thali">THALI</a>
+  <a href="#sharing">SHARE</a>
+  <a href="#rules">RULES</a>
+</nav>
+
+
+<!-- =====================================================
+01 COVER
+===================================================== -->
+
+<section class="hero" id="home">
+
+  <div class="mandala"></div>
+
+  <div class="hero-content">
+
+    <div class="hero-small">
+      Cultural Dinner Party
+    </div>
+
+    <h1>
+      An<br>
+      <span class="gold">Indian</span><br>
+      Evening
+    </h1>
+
+    <p>
+      Step into a real cultural journey through Indian
+      hospitality, food, traditions and table etiquette.
+    </p>
+
+    <a href="#invite" class="btn">
+      ENTER THE EVENING ↓
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+02 INVITATION
+===================================================== -->
+
+<section class="invitation" id="invite">
+
+  <div class="container invite-grid">
+
+    <div class="invite-text reveal">
+
+      <div class="kicker">
+        01 / The Invitation
+      </div>
+
+      <h2>
+        You're<br>
+        <span class="gold">Invited.</span>
+      </h2>
+
+      <p>
+        Namaste! We would be delighted to welcome you
+        to a traditional Indian dinner party, where you can
+        experience the warmth, colours, flavours and
+        hospitality of Indian culture.
+      </p>
+
+      <p>
+        The invitation is sealed.
+        <br><br>
+        <strong class="gold">
+          Click the envelope itself to open it.
+        </strong>
+      </p>
+
+    </div>
+
+
+    <div class="envelope-zone reveal">
+
+      <div class="envelope" id="envelope">
+
+        <div class="env-body"></div>
+
+        <div class="letter">
+
+          <div class="letter-mini">
+            NAMASTE
+          </div>
+
+          <h3>
+            You're Invited
+          </h3>
+
+          <div class="letter-info">
+            <div>📍 <b>Location:</b> Our home</div>
+            <div>📅 <b>Date:</b> Saturday evening</div>
+            <div>🕖 <b>Time:</b> 7:00 p.m.</div>
+            <div>👗 <b>Dress:</b> Smart & respectful</div>
+          </div>
+
+          <p>
+            Come ready to enjoy delicious food,
+            learn about Indian traditions and spend
+            a beautiful evening together.
+          </p>
+
+        </div>
+
+        <div class="flap"></div>
+
+        <div class="seal">
+          ॐ
+        </div>
+
+      </div>
+
+      <div class="click-hint">
+        CLICK THE ENVELOPE
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="diyas">
+    <div class="diya"></div>
+    <div class="diya"></div>
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+03 BEFORE YOU ENTER — REAL INDIAN PHOTOS
+===================================================== -->
+
+<section class="arrival" id="arrival">
+
+  <div class="container arrival-grid">
+
+    <div class="real-india-collage reveal">
+
+      <!-- REAL NAMASTE PHOTO -->
+      <img
+        class="india-main"
+        src="https://images.pexels.com/photos/8819307/pexels-photo-8819307.jpeg?auto=compress&cs=tinysrgb&w=1800"
+        alt="Indian couple greeting with Namaste"
+      >
+
+      <!-- REAL INDIA / NAMASTE PHOTO -->
+      <img
+        class="india-small"
+        src="https://images.pexels.com/photos/35431162/pexels-photo-35431162.jpeg?auto=compress&cs=tinysrgb&w=1200"
+        alt="Indian man performing Namaste in India"
+      >
+
+    </div>
+
+
+    <div class="reveal">
+
+      <div class="kicker">
+        02 / Before You Enter
+      </div>
+
+      <h2>
+        First<br>
+        <span class="gold">Impressions.</span>
+      </h2>
+
+      <div class="rules">
+
+        <div class="rule">
+
+          <div class="rule-number">
+            01
+          </div>
+
+          <div>
+            <b>You should arrive around 7:00 p.m.</b>
+
+            <p style="color:#aaa;font-size:11px;margin-top:6px">
+              A few minutes late may be acceptable,
+              but arriving extremely early may be inconvenient.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="rule">
+
+          <div class="rule-number">
+            02
+          </div>
+
+          <div>
+            <b>You may be greeted with “Namaste”.</b>
+
+            <p style="color:#aaa;font-size:11px;margin-top:6px">
+              Return the greeting respectfully.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="rule">
+
+          <div class="rule-number">
+            03
+          </div>
+
+          <div>
+            <b>Follow the host's house rules.</b>
+
+            <p style="color:#aaa;font-size:11px;margin-top:6px">
+              In some homes, shoes are removed before entering
+              certain areas.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="rule">
+
+          <div class="rule-number">
+            04
+          </div>
+
+          <div>
+            <b>Be warm and respectful.</b>
+
+            <p style="color:#aaa;font-size:11px;margin-top:6px">
+              Hospitality and respect are important parts
+              of the experience.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+04 GIFTS
+===================================================== -->
+
+<section class="gifts" id="gifts">
+
+  <div class="container">
+
+    <div class="reveal">
+
+      <div class="kicker">
+        03 / A Thoughtful Gesture
+      </div>
+
+      <h2>
+        What Could<br>
+        <span class="gold">You Bring?</span>
+      </h2>
+
+    </div>
+
+
+    <div class="gift-grid">
+
+
+      <div class="gift reveal"
+        onclick="openPopup(
+          'Sweets',
+          'A box of sweets or chocolates is a simple and thoughtful gift for the host.',
+          'https://images.pexels.com/photos/9198596/pexels-photo-9198596.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/9198596/pexels-photo-9198596.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian gulab jamun"
+        >
+
+        <div class="gift-info">
+          <h3>Sweets</h3>
+          <p>Tap to discover</p>
+        </div>
+
+      </div>
+
+
+      <div class="gift reveal"
+        onclick="openPopup(
+          'Flowers',
+          'Flowers can be a beautiful gesture of appreciation for your host.',
+          'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85"
+          alt="Flowers"
+        >
+
+        <div class="gift-info">
+          <h3>Flowers</h3>
+          <p>Tap to discover</p>
+        </div>
+
+      </div>
+
+
+      <div class="gift reveal"
+        onclick="openPopup(
+          'Tea',
+          'Tea is a practical and thoughtful present for a host.',
+          'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1200&q=85'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1200&q=85"
+          alt="Tea"
+        >
+
+        <div class="gift-info">
+          <h3>Tea</h3>
+          <p>Tap to discover</p>
+        </div>
+
+      </div>
+
+
+      <div class="gift reveal"
+        onclick="openPopup(
+          'A Small Gift',
+          'You do not need an expensive present. The thoughtful gesture matters more than the price.',
+          'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=85'
+        )">
+
+        <img
+          src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=1200&q=85"
+          alt="Small decorative gift"
+        >
+
+        <div class="gift-info">
+          <h3>Small Gift</h3>
+          <p>Tap to discover</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+05 MENU — REAL FOOD
+===================================================== -->
+
+<section class="menu" id="menu">
+
+  <div class="container">
+
+    <div class="menu-head reveal">
+
+      <div class="kicker">
+        04 / Tonight's Indian Menu
+      </div>
+
+      <h2>
+        A Table Full<br>
+        of <span class="gold">Flavour.</span>
+      </h2>
+
+      <p>
+        Real Indian dishes, rich colours, aromas and
+        flavours. Tap any dish to learn more.
+      </p>
+
+    </div>
+
+
+    <div class="food-grid">
+
+
+      <!-- SAMOSA -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Samosa',
+          'Crispy pastry filled with potatoes and spices.',
+          'https://images.pexels.com/photos/28075291/pexels-photo-28075291.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/28075291/pexels-photo-28075291.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian samosa"
+        >
+
+        <div class="food-info">
+          <small>Starter</small>
+          <h3>Samosa</h3>
+        </div>
+
+      </div>
+
+
+      <!-- PAKORA -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Pakora',
+          'Vegetables coated in seasoned batter and fried until golden.',
+          'https://images.pexels.com/photos/36009120/pexels-photo-36009120.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/36009120/pexels-photo-36009120.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian pakora"
+        >
+
+        <div class="food-info">
+          <small>Starter</small>
+          <h3>Pakora</h3>
+        </div>
+
+      </div>
+
+
+      <!-- PAPAD -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Papad',
+          'Thin and crispy savoury wafers commonly served with Indian meals.',
+          'https://images.pexels.com/photos/26245461/pexels-photo-26245461.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/26245461/pexels-photo-26245461.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian appetizers"
+        >
+
+        <div class="food-info">
+          <small>Starter</small>
+          <h3>Papad</h3>
+        </div>
+
+      </div>
+
+
+      <!-- BIRYANI -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Biryani',
+          'Fragrant rice cooked with aromatic spices and vegetables or meat.',
+          'https://images.pexels.com/photos/36460901/pexels-photo-36460901.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/36460901/pexels-photo-36460901.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian biryani"
+        >
+
+        <div class="food-info">
+          <small>Main</small>
+          <h3>Biryani</h3>
+        </div>
+
+      </div>
+
+
+      <!-- BUTTER CHICKEN -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Butter Chicken',
+          'Tender chicken in a rich, creamy tomato-based sauce.',
+          'https://images.pexels.com/photos/10615283/pexels-photo-10615283.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/10615283/pexels-photo-10615283.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Butter chicken"
+        >
+
+        <div class="food-info">
+          <small>Main</small>
+          <h3>Butter Chicken</h3>
+        </div>
+
+      </div>
+
+
+      <!-- DAL -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Dal',
+          'Lentils cooked with aromatic Indian spices.',
+          'https://images.pexels.com/photos/36885763/pexels-photo-36885763.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/36885763/pexels-photo-36885763.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian thali with dal"
+        >
+
+        <div class="food-info">
+          <small>Main</small>
+          <h3>Dal</h3>
+        </div>
+
+      </div>
+
+
+      <!-- NAAN -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Naan',
+          'Soft Indian flatbread that can be enjoyed with curries and sauces.',
+          'https://images.pexels.com/photos/28241684/pexels-photo-28241684.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/28241684/pexels-photo-28241684.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Naan with Indian thali"
+        >
+
+        <div class="food-info">
+          <small>Bread</small>
+          <h3>Naan</h3>
+        </div>
+
+      </div>
+
+
+      <!-- RAITA -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Raita',
+          'A refreshing yoghurt-based side dish.',
+          'https://images.pexels.com/photos/35008222/pexels-photo-35008222.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/35008222/pexels-photo-35008222.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian thali with yoghurt"
+        >
+
+        <div class="food-info">
+          <small>Side</small>
+          <h3>Raita</h3>
+        </div>
+
+      </div>
+
+
+      <!-- GULAB JAMUN -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Gulab Jamun',
+          'Soft sweet dumplings served in fragrant syrup.',
+          'https://images.pexels.com/photos/9198596/pexels-photo-9198596.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/9198596/pexels-photo-9198596.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Gulab jamun"
+        >
+
+        <div class="food-info">
+          <small>Dessert</small>
+          <h3>Gulab Jamun</h3>
+        </div>
+
+      </div>
+
+
+      <!-- KHEER -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Kheer',
+          'Creamy rice pudding traditionally flavoured with cardamom and nuts.',
+          'https://images.pexels.com/photos/14132108/pexels-photo-14132108.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/14132108/pexels-photo-14132108.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Indian dessert"
+        >
+
+        <div class="food-info">
+          <small>Dessert</small>
+          <h3>Kheer</h3>
+        </div>
+
+      </div>
+
+
+      <!-- THALI -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Indian Thali',
+          'A traditional meal served with several dishes together.',
+          'https://images.pexels.com/photos/36885753/pexels-photo-36885753.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/36885753/pexels-photo-36885753.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Traditional Indian thali"
+        >
+
+        <div class="food-info">
+          <small>Experience</small>
+          <h3>Thali</h3>
+        </div>
+
+      </div>
+
+
+      <!-- FEAST -->
+
+      <div class="food reveal"
+        onclick="openPopup(
+          'Indian Feast',
+          'A colourful shared meal bringing food, hospitality and people together.',
+          'https://images.pexels.com/photos/37420999/pexels-photo-37420999.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )">
+
+        <img
+          src="https://images.pexels.com/photos/37420999/pexels-photo-37420999.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Traditional Indian thali"
+        >
+
+        <div class="food-info">
+          <small>Experience</small>
+          <h3>Indian Feast</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SPICE INTERACTION -->
+
+    <div class="spice-box reveal">
+
+      <h3>
+        How brave are you?
+      </h3>
+
+      <div class="spice-buttons">
+
+        <button onclick="chooseSpice(this,'🌿 Mild — gentle flavours.')">
+          🌿 Mild
+        </button>
+
+        <button onclick="chooseSpice(this,'🌶 Medium — a balanced amount of spice.')">
+          🌶 Medium
+        </button>
+
+        <button onclick="chooseSpice(this,'🌶🌶 Spicy — for guests who enjoy a kick!')">
+          🌶🌶 Spicy
+        </button>
+
+        <button onclick="chooseSpice(this,'🔥 Hot — definitely not for everyone!')">
+          🔥 Hot
+        </button>
+
+      </div>
+
+      <div id="spiceText">
+        Choose your spice level.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+06 HOW SHOULD YOU EAT?
+REAL HAND-EATING PHOTO
+===================================================== -->
+
+<section class="eating" id="eat">
+
+  <div class="container eating-grid">
+
+
+    <div class="hand-eating reveal">
+
+      <!-- REAL KOLKATA THALI EATING PHOTO -->
+      <img
+        src="https://images.pexels.com/photos/36989492/pexels-photo-36989492.jpeg?auto=compress&cs=tinysrgb&w=1800"
+        alt="Woman enjoying traditional Indian thali in Kolkata"
+      >
+
+      <div class="hand-caption">
+        <strong>REAL INDIAN DINING</strong><br>
+        Traditional thali being enjoyed by hand in Kolkata, India.
+      </div>
+
+    </div>
+
+
+    <div class="reveal">
+
+      <div class="kicker">
+        05 / Table Manners
+      </div>
+
+      <h2>
+        How Should<br>
+        You <span class="gold">Eat?</span>
+      </h2>
+
+      <div class="steps">
+
+
+        <div class="step">
+
+          <div class="step-num">
+            01
+          </div>
+
+          <div>
+
+            <h3>
+              You may eat with your hands
+            </h3>
+
+            <p>
+              In some traditional Indian dining settings,
+              eating with the right hand is customary.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num">
+            02
+          </div>
+
+          <div>
+
+            <h3>
+              Use your right hand
+            </h3>
+
+            <p>
+              The right hand is traditionally used for eating
+              in many Indian dining contexts.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num">
+            03
+          </div>
+
+          <div>
+
+            <h3>
+              Tear the naan
+            </h3>
+
+            <p>
+              Tear a small piece of naan and use it
+              to pick up food.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num">
+            04
+          </div>
+
+          <div>
+
+            <h3>
+              Take a reasonable amount
+            </h3>
+
+            <p>
+              You shouldn't take more food than you
+              can comfortably eat.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-num">
+            05
+          </div>
+
+          <div>
+
+            <h3>
+              Respect the food
+            </h3>
+
+            <p>
+              Avoid wasting food prepared especially
+              for guests.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+07 THALI
+===================================================== -->
+
+<section class="thali-section" id="thali">
+
+  <div class="container">
+
+    <div class="reveal">
+
+      <div class="kicker">
+        06 / Explore the Plate
+      </div>
+
+      <h2>
+        The Indian<br>
+        <span class="gold">Thali.</span>
+      </h2>
+
+      <p style="
+        max-width:620px;
+        margin:25px auto;
+        color:#d5c5ae;
+        line-height:1.8;
+      ">
+        A thali can bring several flavours together in one meal.
+        Tap the labels to explore.
+      </p>
+
+    </div>
+
+
+    <div class="thali reveal">
+
+      <div
+        class="thali-label label-dal"
+        onclick="openPopup(
+          'Dal',
+          'Lentils cooked with aromatic spices.',
+          'https://images.pexels.com/photos/36885763/pexels-photo-36885763.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )"
+      >
+        DAL
+      </div>
+
+
+      <div
+        class="thali-label label-rice"
+        onclick="openPopup(
+          'Rice',
+          'Fragrant rice is an important part of many Indian meals.',
+          'https://images.pexels.com/photos/36460901/pexels-photo-36460901.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )"
+      >
+        RICE
+      </div>
+
+
+      <div
+        class="thali-label label-curry"
+        onclick="openPopup(
+          'Curry',
+          'Aromatic curry can be enjoyed with rice or bread.',
+          'https://images.pexels.com/photos/10615283/pexels-photo-10615283.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )"
+      >
+        CURRY
+      </div>
+
+
+      <div
+        class="thali-label label-naan"
+        onclick="openPopup(
+          'Naan',
+          'Soft flatbread that can be used to pick up food.',
+          'https://images.pexels.com/photos/28241684/pexels-photo-28241684.jpeg?auto=compress&cs=tinysrgb&w=1400'
+        )"
+      >
+        NAAN
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+08 SHARING
+===================================================== -->
+
+<section class="sharing" id="sharing">
+
+  <div class="container share-grid">
+
+    <div class="share-photo reveal">
+
+      <img
+        src="https://images.pexels.com/photos/37420999/pexels-photo-37420999.jpeg?auto=compress&cs=tinysrgb&w=1800"
+        alt="Traditional Indian thali"
+      >
+
+    </div>
+
+
+    <div class="reveal">
+
+      <div class="kicker">
+        07 / The Social Table
+      </div>
+
+      <h2>
+        Food is<br>
+        <span class="gold">Connection.</span>
+      </h2>
+
+
+      <div class="share-list">
+
+
+        <div class="share-item">
+
+          <h3>
+            Share
+          </h3>
+
+          <p>
+            Several dishes may be placed in the centre,
+            allowing everyone to enjoy the meal together.
+          </p>
+
+        </div>
+
+
+        <div class="share-item">
+
+          <h3>
+            Be considerate
+          </h3>
+
+          <p>
+            You should avoid reaching across another guest.
+          </p>
+
+        </div>
+
+
+        <div class="share-item">
+
+          <h3>
+            Refuse politely
+          </h3>
+
+          <p>
+            “Thank you, everything was delicious,
+            but I'm full.”
+          </p>
+
+        </div>
+
+
+        <div class="share-item">
+
+          <h3>
+            Appreciate your host
+          </h3>
+
+          <p>
+            Thank your host for the meal and hospitality.
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+09 MUSTS & MUSTN'TS
+===================================================== -->
+
+<section class="rules-section" id="rules">
+
+  <div class="container">
+
+    <div class="rules-title reveal">
+
+      <div class="kicker">
+        08 / Remember This
+      </div>
+
+      <h2>
+        The Golden<br>
+        <span class="gold">Rules.</span>
+      </h2>
+
+    </div>
+
+
+    <div class="do-dont">
+
+
+      <div class="panel reveal">
+
+        <h3>
+          YOU SHOULD
+        </h3>
+
+        <ul>
+
+          <li>
+            ✓ Arrive around the agreed time.
+          </li>
+
+          <li>
+            ✓ Greet your hosts politely.
+          </li>
+
+          <li>
+            ✓ Respect household rules.
+          </li>
+
+          <li>
+            ✓ Try the food with an open mind.
+          </li>
+
+          <li>
+            ✓ Use your right hand in traditional settings.
+          </li>
+
+          <li>
+            ✓ Compliment and thank your host.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div class="panel reveal">
+
+        <h3>
+          YOU SHOULDN'T
+        </h3>
+
+        <ul>
+
+          <li>
+            × Arrive extremely early.
+          </li>
+
+          <li>
+            × Waste food.
+          </li>
+
+          <li>
+            × Criticize unfamiliar food.
+          </li>
+
+          <li>
+            × Take more food than you can eat.
+          </li>
+
+          <li>
+            × Touch religious objects without permission.
+          </li>
+
+          <li>
+            × Make disrespectful jokes about traditions.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="reveal"
+      style="
+        margin:25px auto 0;
+        max-width:900px;
+        padding:25px;
+        text-align:center;
+        border:1px solid rgba(255,255,255,.1);
+        background:rgba(255,255,255,.03);
+        color:#d8c8b2;
+        line-height:1.8;
+      "
+    >
+
+      <strong class="gold">
+        YOU MUST:
+      </strong>
+
+      respect the host, their home and any specific
+      cultural or religious instructions.
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+10 FINAL WOW
+===================================================== -->
+
+<section class="final">
+
+  <div class="mandala"></div>
+
+  <div class="final-content reveal">
+
+    <div class="kicker">
+      The Indian Spirit of Hospitality
+    </div>
+
+    <h2>
+      Come as a<br>
+      <span class="gold">guest.</span><br>
+      Leave as <span class="gold">family.</span>
+    </h2>
+
+    <p>
+      An Indian dinner is not simply about eating.
+      It is about hospitality, connection and sharing.
+
+      Come with an open heart, try something new,
+      and don't be afraid of the spices!
+    </p>
+
+    <div class="namaste">
+      NAMASTE
+    </div>
+
+    <p style="
+      font-size:10px;
+      letter-spacing:3px;
+      text-transform:uppercase;
+    ">
+      Thank you for joining our Indian evening
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+POPUP
+===================================================== -->
+
+<div class="popup" id="popup">
+
+  <div class="popup-card">
+
+    <button
+      class="close"
+      onclick="closePopup()"
+    >
+      ×
+    </button>
+
+    <img
+      id="popupImage"
+      src=""
+      alt=""
+    >
+
+    <div class="popup-content">
+
+      <h3 id="popupTitle"></h3>
+
+      <p id="popupText"></p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   ENVELOPE
+========================= */
+
+const envelope =
+document.getElementById("envelope");
+
+envelope.addEventListener("click",()=>{
+  envelope.classList.toggle("open");
+});
+
+
+/* =========================
+   REVEAL
+========================= */
+
+const observer =
+new IntersectionObserver(
+  entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  {
+    threshold:.12
+  }
+);
+
+document
+.querySelectorAll(".reveal")
+.forEach(element=>{
+  observer.observe(element);
+});
+
+
+/* =========================
+   POPUP
+========================= */
+
+function openPopup(title,text,image){
+
+  document
+  .getElementById("popupTitle")
+  .textContent=title;
+
+  document
+  .getElementById("popupText")
+  .textContent=text;
+
+  document
+  .getElementById("popupImage")
+  .src=image;
+
+  document
+  .getElementById("popup")
+  .classList.add("active");
+
+}
+
+
+function closePopup(){
+
+  document
+  .getElementById("popup")
+  .classList.remove("active");
+
+}
+
+
+document
+.getElementById("popup")
+.addEventListener("click",event=>{
+
+  if(event.target.id==="popup"){
+    closePopup();
+  }
+
+});
+
+
+document.addEventListener("keydown",event=>{
+
+  if(event.key==="Escape"){
+    closePopup();
+  }
+
+});
+
+
+/* =========================
+   SPICE
+========================= */
+
+function chooseSpice(button,text){
+
+  document
+  .querySelectorAll(".spice-buttons button")
+  .forEach(item=>{
+    item.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document
+  .getElementById("spiceText")
+  .textContent=text;
+
+}
+
+
+/* =========================
+   FALLING PETALS
+========================= */
+
+function createPetal(){
+
+  const petal =
+  document.createElement("div");
+
+  petal.className="petal";
+
+  petal.style.left=
+  Math.random()*100+"vw";
+
+  petal.style.animationDuration=
+  (6+Math.random()*8)+"s";
+
+  petal.style.transform=
+  `rotate(${Math.random()*360}deg)`;
+
+  document.body.appendChild(petal);
+
+  setTimeout(()=>{
+    petal.remove();
+  },15000);
+
+}
+
+setInterval(createPetal,900);
+
+
+/* =========================
+   IMAGE FALLBACK
+========================= */
+
+document
+.querySelectorAll("img")
+.forEach(image=>{
+
+  image.addEventListener(
+    "error",
+    function(){
+
+      if(this.dataset.fallback){
+        return;
+      }
+
+      this.dataset.fallback="yes";
+
+      this.src=
+      "https://images.pexels.com/photos/36885763/pexels-photo-36885763.jpeg?auto=compress&cs=tinysrgb&w=1200";
+
+    }
+  );
+
+});
+
+
+/* =========================
+   KEYBOARD NAVIGATION
+========================= */
+
+const sections =
+[...document.querySelectorAll("section")];
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      event.key!=="ArrowDown" &&
+      event.key!=="ArrowUp"
+    ){
+      return;
+    }
+
+    let current =
+    Math.round(
+      window.scrollY /
+      window.innerHeight
+    );
+
+    if(event.key==="ArrowDown"){
+      current++;
+    }
+
+    if(event.key==="ArrowUp"){
+      current--;
+    }
+
+    current=
+    Math.max(
+      0,
+      Math.min(
+        current,
+        sections.length-1
+      )
+    );
+
+    sections[current]
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+);
+
+</script>
+
+</body>
+</html>
